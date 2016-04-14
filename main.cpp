@@ -12,8 +12,8 @@ int main()
   // realm and on each third line the power of the aforementioned magi in the order that they would meet
   // Kael’zak in the realm. On the following two lines you can read, respectively, the charm for Kael’zak’s realm
   // and the charm for the destination realm.
- int numOfRealms, numOfMagi, magiPower;
- string charm;
+  int numOfRealms, numOfMagi, magiPower;
+  string charm;
  
   return 0;
 }
