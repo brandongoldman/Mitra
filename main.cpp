@@ -36,6 +36,11 @@ void int shortestPath(DirectedWeightedGraph graph)
 	// cout incantations + " " + gems;
 }
 
+DirectedWeightedGraph makeGraph(vector <realm> realms)
+{
+	// for return trip, reverse vector
+}
+
 // if impossible, make num of incantations = -1 || set minIncantations = -1
 
 int main()
