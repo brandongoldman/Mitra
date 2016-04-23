@@ -93,14 +93,73 @@ vector<int> maxIncantations(vector<int> magi)
 		
 		// After searching, low is 1 greater than the length
 		// of the longest prefix of magi[i]
-		int newLow = low;
+		int newLong = low;
 		
 		// The predecessor of magi[i] is the last
 		// index of the subsequence of length newLow-1
+		P[i] = M[newLong-1];
+		M[newLong] = i;
 		
-		
-		
+		if (newLong > L)
+		{
+			// if we found a subsequence longer than any we've found yet, update L
+			L = newLong;
+		}
 	}
+	
+	// Reconstruct the longest increasing subsequence
+	vector<int> subSequence (L);
+	int k = M[L];
+	
+	for (int i = L-1; i<=0; i--)
+	{
+		subSequence[i] = magi[k];
+		k = P[k];
+	}
+	
+	return subSequence;
+}
+
+// Call this to test the maxIncantations() function
+void test_maxIncantations()
+{
+	bool debugFlag = true;
+	if (debugFlag) {
+		std::cout << "Debugging is turned ON for test_maxIncantations()" << endl;
+	}
+	
+	int testSize; // temporary storage for size
+	
+	if (debugFlag) { std::cout << "Define a size for the test sequence vector." << endl; } // debug line
+	
+		std::cin >> testSize; // get size from user at test runtime
+	
+		vector<int> testVector (testSize); // temporary storage for a test vector
+	
+	for (int i = 0; i<testSize; i++) // iterate through sequence
+	{
+		if (debugFlag) { std::cout << "Define the value at index " << i << endl; } // debug line
+		
+			std::cin >> testVector[i]; // store each magi value of sequence
+		
+		if (debugFlag) { std::cout << "Value of " << testVector[i] << " was stored at " << i << endl; } // debug line
+	}
+	
+	if (debugFlag) { std::cout << "About to call maxIncantations()..." << endl; } // debug line
+	
+		vector<int> testMagiSeq = maxIncantations(testVector); // declare another vector that will store the return vector from calling maxIncantations()
+	
+	if (debugFlag) { std::cout << "Finished call for maxIncantations()." << endl; } // debug line
+
+	// Iterate through and print the vector values with the maximum incantations
+	if (debugFlag) { std::cout << "Iterating output..." << endl; } // debug line
+		for (auto it = testMagiSeq.begin(); it!= testMagiSeq.end(); it++)
+		{
+			std::cout << *it << " "; // dereferencing the values of the maxIncantations sequence
+		}
+	
+		std::cout << endl;
+	if (debugFlag) { std::cout << "Completed." << endl; } // debug line
 }
 
 // edit distance algorithm to find string alignment
