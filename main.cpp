@@ -1,12 +1,10 @@
 /* ---------------------------------------------------------------------------
-** 					Project 2 - Mitra, The Messenger of Love
-** 							COP3530 - Spring 2016
+** Project 2 - Mitra, The Messenger of Love
+** COP3530 - Spring 2016
 **
-** 					Authors: 
-** 						- Brandon Goldman
-**						- Michael Riccardi
-**						- Harrison Magoutas
-**						- Ryan Gruszczyk
+** Authors: 
+** 	Brandon Goldman, Michael Riccardi, Harrison Magoutas, Ryan Gruszczyk
+**
 ** -------------------------------------------------------------------------*/
 
 #include <iostream>
