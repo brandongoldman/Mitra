@@ -14,4 +14,4 @@
 - [ ] Determine if incantations are possible (if not, print IMPOSSIBLE)
 - [ ] Finish shortestPath() method (Dijkstra's Method)
 - [ ] Finish Main method (handle input)
-- [ ] Finish Graph method
+- [X] Finish Graph method
