@@ -62,6 +62,41 @@ struct realm
 vector<int> maxIncantations(vector<int> magi)
 {
 	// determine most number of possible steps
+	int magiSeqSize = magi.size();
+	vector<int> P (magiSeqSize);
+	vector<int> M (magiSeqSize+1);
+	
+	int L = 0;
+	
+	for (int i = 0; i <= magiSeqSize-1; i++)
+	{
+		int low = 1;
+		int high = L;
+		
+		while (low <= high)
+		{
+			int mid = ceil((low+high)/2);
+			
+			if (magi[M[mid]] < magi[i])
+			{
+				low = mid+1;
+			}
+			else
+			{
+				high = mid-1;
+			}
+		}
+		
+		// After searching, low is 1 greater than the length
+		// of the longest prefix of magi[i]
+		int newLow = low;
+		
+		// The predecessor of magi[i] is the last
+		// index of the subsequence of length newLow-1
+		
+		
+		
+	}
 }
 
 // edit distance algorithm to find string alignment
