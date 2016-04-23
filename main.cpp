@@ -216,8 +216,6 @@ int minIncantationsBetween(string startingRealm, string endingRealm)
 	return distanceBetween[ startingRealm.length() ][ endingRealm.length() ];
 }
 
-// Dijkstra's Method to determine least heavy path start -> end
-
 bool checkIfPossibleStartToFinish()
 {
 	// does # steps start to finish == # possible incantations
@@ -226,6 +224,7 @@ bool checkIfPossibleStartToFinish()
 	// Michael: this might be covered in Dijkstra's algorithm
 }
 
+// this is for Dijkstra's method to determine least heavy path from s->f
 void shortestPath(Graph graph)
 {
 	// cout incantations + " " + gems;
