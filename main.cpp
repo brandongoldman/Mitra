@@ -16,16 +16,31 @@
 
 using namespace std;
 
+struct Realm
+{
+	vector<int> magi;
+	string charm;
+	Realm()
+	{
+		charm = "";
+	}
+	Realm(string c, vector<int> m)
+	{
+		charm = c;
+		magi = m;
+	}
+};
+
 struct Edge; // empty declaration to make the compiler happy
 
 struct Vertex
 {
 	bool visited;
-	string value;
+	Realm realm;
 	vector<Edge*> edges;
-	Vertex(string v)
+	Vertex(Realm r)
 	{
-		value = v;
+		realm = r;
 		visited = false;
 	}
 	void addEdge(Edge* e)
@@ -55,12 +70,6 @@ struct Graph
 	{
 		vertices.push_back(v);
 	}
-};
-
-struct realm
-{
-	vector <int> magis;
-	string charm;
 };
 
 vector<int> maxIncantations(vector<int> magi)
@@ -221,10 +230,31 @@ void shortestPath(Graph graph)
 	// cout incantations + " " + gems;
 }
 
-Graph makeGraph(vector<realm> realms)
+Graph makeGraph(vector<Realm> realms)
 {
-	// for return trip, reverse vector
+	Graph graph = Graph();
+	
+	for(int i = 0; i < realms.size(); i++)
+	{
+		graph.addVertex(new Vertex(realms[i]));
+	}
+	
+	for(int i = 0; i < realms.size(); i++)
+	{
+		for(int j = i + 1; j < realms.size(); i++)
+		{
+			int available = maxIncantations(realms[i].magi).size();
+			int needed = minIncantationsBetween(realms[i].charm, realms[j].charm);
+			if(available >= needed)
+			{
+				graph.vertices[i]->addEdge(new Edge(graph.vertices[j], needed));
+			}
+		}
+	}
+	
+	return graph;
 }
+	// for return trip, reverse vector
 
 // if impossible, make num of incantations = -1 || set minIncantations = -1
 
