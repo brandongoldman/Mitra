@@ -59,7 +59,7 @@ int minIncantationsBetween(string startingRealm, string endingRealm)
 			}
 			else if (startingRealm.at(i - 1) == endingRealm.at(j - 1))
 			{
-				distanceBetween[i][j] = dist[i-1][j-1];
+				distanceBetween[i][j] = distanceBetween[i-1][j-1];
 			}
 			else
 			{
