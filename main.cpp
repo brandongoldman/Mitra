@@ -16,15 +16,17 @@
 
 using namespace std;
 
+struct Edge; // empty declaration to make the compiler happy
+
 struct Node
 {
 	string value;
-	vector<Edge> edges;
+	vector<Edge*> edges;
 	Node(string v)
 	{
 		value = v;
 	}
-	addEdge(Edge e)
+	void addEdge(Edge* e)
 	{
 		edges.push_back(e);
 	}
@@ -33,8 +35,8 @@ struct Node
 struct Edge
 {
 	int weight;
-	Node next;
-	Edge(Node n, int w)
+	Node* next;
+	Edge(Node* n, int w)
 	{
 		weight = w;
 		next = n;
@@ -43,8 +45,8 @@ struct Edge
 
 struct Graph
 {
-	Node head;
-	Graph(Node h)
+	Node* head;
+	Graph(Node* h)
 	{
 		head = h;
 	}
