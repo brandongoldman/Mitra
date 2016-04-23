@@ -234,19 +234,23 @@ Graph makeGraph(vector<Realm> realms)
 {
 	Graph graph = Graph();
 	
+	// add each realm to the graph
 	for(int i = 0; i < realms.size(); i++)
 	{
 		graph.addVertex(new Vertex(realms[i]));
 	}
 	
+	// for each realm
 	for(int i = 0; i < realms.size(); i++)
 	{
+		// try to link each to the realms after it
 		for(int j = i + 1; j < realms.size(); i++)
 		{
-			int available = maxIncantations(realms[i].magi).size();
-			int needed = minIncantationsBetween(realms[i].charm, realms[j].charm);
-			if(available >= needed)
+			int available = maxIncantations(realms[i].magi).size(); // # of incantations possible 
+			int needed = minIncantationsBetween(realms[i].charm, realms[j].charm); // # of incantations needed
+			if(available >= needed) // if it is possible to travel from realm[i] to realm[j]
 			{
+				// add edge connecting the two, with weight of the # of incantations needed
 				graph.vertices[i]->addEdge(new Edge(graph.vertices[j], needed));
 			}
 		}
