@@ -27,9 +27,48 @@ int  maxIncantations(vector <int> magi)
 	// determine most number of possible steps
 }
 
+// edit distance algorithm to find string alignment
 int minIncantationsBetween(string startingRealm, string endingRealm)
 {
 	// return minimum number of incantations needed to go start -> end
+	int sizeOfStart = startingRealm.length() + 1;
+	int sizeOfEnd = endingRealm.length() + 1;
+	int distanceBetween[sizeOfStart][sizeOfEnd];
+
+	// PSEUDOCODE FROM THE INTERWEBS WOO!!
+	// parse string
+	// for size of A (0:i)
+	// 		for size of B (0:j)
+	//			if i=0, dist[i][j] = j;
+	//			if j=0, dist[i][j] = i;
+	//			if char at A(i-1) = char at B(j-1)
+	//				dist[i][j] = dist[i-1][j-1];
+	//			else dist[i][j] = 1 + findMinOf(dist[i][j-1], dist[i-1][j], dist[i-1][j-1]);
+
+	for(int i = 0; i <= startingRealm.size(); i++)
+	{
+		for(int j = 0; j <= endingRealm.size(); j++)
+		{
+			if (i == 0)
+			{
+				distanceBetween[i][j] = j;
+			}
+			else if (j == 0)
+			{
+				distanceBetween[i][j] = i;
+			}
+			else if (startingRealm.at(i - 1) == endingRealm.at(j - 1))
+			{
+				distanceBetween[i][j] = dist[i-1][j-1];
+			}
+			else
+			{
+				distanceBetween[i][j] = 1 + min( min(distanceBetween[i][j-1], distanceBetween[i-1][j]), distanceBetween[i-1][j-1]);
+			}
+		}
+	}
+
+	return distanceBetween[ startingRealm.length() ][ endingRealm.length() ];
 }
 
 // Dijkstra's Method to determine least heavy path start -> end
