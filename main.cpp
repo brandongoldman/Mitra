@@ -18,13 +18,15 @@ using namespace std;
 
 struct Edge; // empty declaration to make the compiler happy
 
-struct Node
+struct Vertex
 {
+	bool visited;
 	string value;
 	vector<Edge*> edges;
-	Node(string v)
+	Vertex(string v)
 	{
 		value = v;
+		visited = false;
 	}
 	void addEdge(Edge* e)
 	{
@@ -35,8 +37,8 @@ struct Node
 struct Edge
 {
 	int weight;
-	Node* next;
-	Edge(Node* n, int w)
+	Vertex* next;
+	Edge(Vertex* n, int w)
 	{
 		weight = w;
 		next = n;
@@ -45,13 +47,15 @@ struct Edge
 
 struct Graph
 {
-	Node* head;
-	Graph(Node* h)
+	vector<Vertex*> vertices;
+	Graph()
 	{
-		head = h;
+	}
+	void addVertex(Vertex* v)
+	{
+		vertices.push_back(v);
 	}
 };
-
 
 struct realm
 {
