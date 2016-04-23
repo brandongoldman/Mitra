@@ -4,13 +4,13 @@
 **
 ** Authors: 
 ** 	Brandon Goldman, Michael Riccardi, Harrison Magoutas, Ryan Gruszczyk
-**
 ** -------------------------------------------------------------------------*/
 
 #include <iostream>
 #include <unordered_map>
 #include <vector>
 #include <queue>
+#include <stack>
 #include <algorithm>
 #include <string>
 
