@@ -121,7 +121,7 @@ vector<int> maxIncantations(vector<int> magi)
 	vector<int> subSequence (L);
 	int k = M[L];
 	
-	for (int i = L-1; i<=0; i--)
+	for (int i = L-1; i>=0; i--)
 	{
 		subSequence[i] = magi[k];
 		k = P[k];
