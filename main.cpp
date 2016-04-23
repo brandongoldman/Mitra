@@ -1,8 +1,19 @@
+/* ---------------------------------------------------------------------------
+** 					Project 2 - Mitra, The Messenger of Love
+** 							COP3530 - Spring 2016
+**
+** 					Authors: 
+** 						- Brandon Goldman
+**						- Michael Riccardi
+**						- Harrison Magoutas
+**						- Ryan Gruszczyk
+** -------------------------------------------------------------------------*/
+
 #include <iostream>
-//#include <unordered_map>
+#include <unordered_map>
 #include <vector>
-//#include <queue>
-//#include <algorithm>
+#include <queue>
+#include <algorithm>
 #include <string>
 
 using namespace std;
@@ -56,6 +67,7 @@ int main()
   	cin >> charm;
   	cin >> numOfMagi;
   	sequenceOfMagi.resize(numOfMagi);	// set size of vector to number of magi
+  	
   	for(int j = 0; j < numOfMagi; j++)
   	{
   		cin >> sequenceOfMagi.at(j);
