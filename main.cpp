@@ -1,5 +1,3 @@
-// This is a test -H
-
 #include <iostream>
 //#include <unordered_map>
 #include <vector>
@@ -49,15 +47,23 @@ int main()
 {
   int numOfRealms, numOfMagi, magiPower;
   string charm, startingCharm, destinationCharm;
+  vector <int> sequenceOfMagi;
 
   cin >> numOfRealms;
 
-  // for number of realms
-	cin >> charm;
+  for(int i = 0; i < numOfRealms; i++)
+  {
+  	cin >> charm;
   	cin >> numOfMagi;
+  	sequenceOfMagi.resize(numOfMagi);	// set size of vector to number of magi
+  	for(int j = 0; j < numOfMagi; j++)
+  	{
+  		cin >> sequenceOfMagi.at(j);
+  	}
+  }
 
-  cin >> startingCharm >> destinationCharm;
+  cin >> startingCharm;
+  cin >> destinationCharm;
 
- 
   return 0;
 }
