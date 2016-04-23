@@ -7,8 +7,6 @@
 **
 ** -------------------------------------------------------------------------*/
 
-// Yay
-
 #include <iostream>
 #include <unordered_map>
 #include <vector>
@@ -17,6 +15,41 @@
 #include <string>
 
 using namespace std;
+
+struct Node
+{
+	string value;
+	vector<Edge> edges;
+	Node(string v)
+	{
+		value = v;
+	}
+	addEdge(Edge e)
+	{
+		edges.push_back(e);
+	}
+};
+
+struct Edge
+{
+	int weight;
+	Node next;
+	Edge(Node n, int w)
+	{
+		weight = w;
+		next = n;
+	}
+};
+
+struct Graph
+{
+	Node head;
+	Graph(Node h)
+	{
+		head = h;
+	}
+};
+
 
 struct realm
 {
