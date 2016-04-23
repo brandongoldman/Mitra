@@ -55,11 +55,11 @@ struct Graph
 
 struct realm
 {
-	// vector <int> magis;
-	// string charm;
+	vector <int> magis;
+	string charm;
 };
 
-int  maxIncantations(vector <int> magi)
+vector<int> maxIncantations(vector<int> magi)
 {
 	// determine most number of possible steps
 }
@@ -114,14 +114,16 @@ bool checkIfPossibleStartToFinish()
 {
 	// does # steps start to finish == # possible incantations
 	// if not, bool is IMPOSSIBLE, print statement in different method
+	
+	// Michael: this might be covered in Dijkstra's algorithm
 }
 
-void int shortestPath(DirectedWeightedGraph graph)
+void shortestPath(Graph graph)
 {
 	// cout incantations + " " + gems;
 }
 
-DirectedWeightedGraph makeGraph(vector <realm> realms)
+Graph makeGraph(vector<realm> realms)
 {
 	// for return trip, reverse vector
 }
