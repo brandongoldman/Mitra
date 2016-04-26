@@ -18,6 +18,7 @@
 
 using namespace std;
 
+// defines realm as having set of magi with integer powers and a charm of type string
 struct Realm
 {
 	vector<int> magi;
@@ -35,6 +36,9 @@ struct Realm
 
 struct Edge; // empty declaration to make the compiler happy
 
+// vertex will store realm as well as edges that connect realms
+// stores to vector of edges
+// can track if realm is visited and its tenative edge weight for Dijkstra
 struct Vertex
 {
 	bool visited;
@@ -55,6 +59,7 @@ struct Vertex
 	}
 };
 
+// contains edge which holds weight and cost to next realm
 struct Edge
 {
 	int weight;
@@ -68,6 +73,7 @@ struct Edge
 	}
 };
 
+// holds set of vertices
 struct Graph
 {
 	vector<Vertex*> vertices;
@@ -80,20 +86,23 @@ struct Graph
 	}
 };
 
+// least increasing subsequence
 vector<int> maxIncantations(vector<int> magi)
 {
 	// determine most number of possible steps
 	int magiSeqSize = magi.size();
-	vector<int> P (magiSeqSize);
-	vector<int> M (magiSeqSize+1);
+	vector<int> P (magiSeqSize);		// vector of sequence size; used for indexing
+	vector<int> M (magiSeqSize+1);		// used for index with size + 1
 	
-	int L = 0;
+	int L = 0;		// lowest integer value set to 0 initially
 	
 	for (int i = 0; i <= magiSeqSize-1; i++)
 	{
 		int low = 1;
 		int high = L;
 		
+		// binary search to find largest power
+		// O(logn)
 		while (low <= high)
 		{
 			int mid = ceil((low+high)/2);
@@ -187,7 +196,6 @@ int minIncantationsBetween(string startingRealm, string endingRealm)
 	int sizeOfEnd = endingRealm.length() + 1;
 	int distanceBetween[sizeOfStart][sizeOfEnd];
 
-	// PSEUDOCODE FROM THE INTERWEBS WOO!!
 	// parse string
 	// for size of A (0:i)
 	// 		for size of B (0:j)
@@ -196,33 +204,37 @@ int minIncantationsBetween(string startingRealm, string endingRealm)
 	//			if char at A(i-1) = char at B(j-1)
 	//				dist[i][j] = dist[i-1][j-1];
 	//			else dist[i][j] = 1 + findMinOf(dist[i][j-1], dist[i-1][j], dist[i-1][j-1]);
-
+	
+	// for parsed string of char
 	for(int i = 0; i <= startingRealm.size(); i++)
 	{
 		for(int j = 0; j <= endingRealm.size(); j++)
 		{
-			if (i == 0)
+			if (i == 0)	// distance between two words is 0 for first iteration
 			{
 				distanceBetween[i][j] = j;
 			}
-			else if (j == 0)
+			else if (j == 0) // iterate second time to find min distance, store back in array
 			{
 				distanceBetween[i][j] = i;
 			}
-			else if (startingRealm.at(i - 1) == endingRealm.at(j - 1))
+			else if (startingRealm.at(i - 1) == endingRealm.at(j - 1)) // compare character of string A and character of string B and if they are the same, you dont need to add one to dist integer
 			{
 				distanceBetween[i][j] = distanceBetween[i-1][j-1];
 			}
 			else
 			{
-				distanceBetween[i][j] = 1 + min( min(distanceBetween[i][j-1], distanceBetween[i-1][j]), distanceBetween[i-1][j-1]);
+				distanceBetween[i][j] = 1 + min( min(distanceBetween[i][j-1], distanceBetween[i-1][j]), distanceBetween[i-1][j-1]); // find minimum number of changes needed to go string A -> B
 			}
 		}
 	}
 
-	return distanceBetween[ startingRealm.length() ][ endingRealm.length() ];
+	return distanceBetween[ startingRealm.length() ][ endingRealm.length() ];	// return integer containing number of changes needed to go A -> B
 }
 
+// makes a graph of type realms
+// determine if it is possible to go realm to realm by checking if sufficient incantations are possible
+// if so, links vertices with edges
 Graph makeGraph(vector<Realm> realms)
 {
 	Graph graph = Graph();
@@ -261,9 +273,10 @@ Graph makeGraph(vector<Realm> realms)
 	return graph;
 }
 
-// Dijkstra's Method to determine least heavy path start -> end
+// Dijkstra's Algorithm to determine least number of incantations needed to go from Start -> Finish
 void shortestPath(Graph &graph, string startingCharm, string destinationCharm)
 {
+	// find start and end destination in the graph
 	int N = graph.vertices.size();
 	
 	int startIndex = -1;
@@ -400,6 +413,7 @@ void shortestPath(Graph &graph, string startingCharm, string destinationCharm)
 	}
 }
 
+// handles input
 int main()
 {
 	int numOfRealms, numOfMagi, magiPower;
