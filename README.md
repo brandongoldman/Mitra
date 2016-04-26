@@ -11,7 +11,8 @@
 ---
 
 #### To-Do:
-- [ ] Determine if incantations are possible (if not, print IMPOSSIBLE)
-- [ ] Finish shortestPath() method (Dijkstra's Method)
-- [ ] Finish Main method (handle input)
+- [X ] Determine if incantations are possible (if not, print IMPOSSIBLE)
+- [ X] Finish shortestPath() method (Dijkstra's Method)
+- [ X] Finish Main method (handle input)
 - [X] Finish Graph method
+- [X] Pass Data Structures
