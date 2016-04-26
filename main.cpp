@@ -289,11 +289,11 @@ void shortestPath(Graph &graph, string startingCharm, string destinationCharm)
 		}
 	}
 	
-	if(startIndex == -1 || destinationIndex == -1)
+	/*if(startIndex == -1 || destinationIndex == -1)
 	{
 		cout << "IMPOSSIBLE" << endl;
 		return;
-	}
+	}*/
 	
 	/* 1. Assign to every node a tentative distance value: set it to zero
 	 * for our initial node and to infinity for all other nodes. */
@@ -314,41 +314,44 @@ void shortestPath(Graph &graph, string startingCharm, string destinationCharm)
 	
 	do
 	{
-		minVertex = curVertex->edges[0]->next;
-		minDistance = curVertex->distance;
-		//cout << curVertex->realm.charm << endl;
-
-		/* 3. For the current node, consider all of its unvisited neighbors and
-		 * calculate their tentative distances. Compare the newly calculated
-		 * tentative distance to the current assigned value and assign the
-		 * smaller one. For example, if the current node A is marked with a
-		 * distance of 6, and the edge connecting it with a neighbor B has
-		 * length 2, then the distance to B (through A) will be 6 + 2 = 8.
-		 * If B was previously marked with a distance greater than 8 then
-		 * change it to 8. Otherwise, keep the current value. */
-		 
-		//cout << curVertex->edges.size() << endl;
-				
-		for(int i=0; i < curVertex->edges.size(); i++)
+		if(curVertex->edges.size() > 0)
 		{
-			Edge* curEdge = curVertex->edges[i];
-			int curWeight = curEdge->weight;
-			int curCost = curEdge->cost;
-			Vertex* next = curEdge->next;
-			
-			if(!next->visited)
-			{				
-				//cout << "  " << next->realm.charm << endl;
+			minVertex = curVertex->edges[0]->next;
+			minDistance = curVertex->distance;
+			//cout << curVertex->realm.charm << endl;
+
+			/* 3. For the current node, consider all of its unvisited neighbors and
+			 * calculate their tentative distances. Compare the newly calculated
+			 * tentative distance to the current assigned value and assign the
+			 * smaller one. For example, if the current node A is marked with a
+			 * distance of 6, and the edge connecting it with a neighbor B has
+			 * length 2, then the distance to B (through A) will be 6 + 2 = 8.
+			 * If B was previously marked with a distance greater than 8 then
+			 * change it to 8. Otherwise, keep the current value. */
+			 
+			//cout << curVertex->edges.size() << endl;
+					
+			for(int i=0; i < curVertex->edges.size(); i++)
+			{
+				Edge* curEdge = curVertex->edges[i];
+				int curWeight = curEdge->weight;
+				int curCost = curEdge->cost;
+				Vertex* next = curEdge->next;
 				
-				int tentative_distance = curVertex->distance + curWeight;
-				
-				if(tentative_distance < next->distance)
-				{
-					next->distance = tentative_distance;
-					next->cost = curVertex->cost + curCost;
-					//cout << "    shorter found" << endl;
-				}				
-			}			
+				if(!next->visited)
+				{				
+					//cout << "  " << next->realm.charm << endl;
+					
+					int tentative_distance = curVertex->distance + curWeight;
+					
+					if(tentative_distance < next->distance)
+					{
+						next->distance = tentative_distance;
+						next->cost = curVertex->cost + curCost;
+						//cout << "    shorter found" << endl;
+					}				
+				}			
+			}
 		}
 		
 		/* 4. When we are done considering all of the neighbors of the current node,
